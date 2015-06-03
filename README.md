@@ -23,6 +23,10 @@ mvn test
 
 In order to use the API you need an instance of PointOfSaleFacade
 
+```
+#!java
+       PointOfSaleFacade pointOfSaleFacade = new PointOfSaleFacade();
+```
 ### Add a new product
 
 
@@ -32,7 +36,6 @@ In order to use the API you need an instance of PointOfSaleFacade
 public class Main {
     public static void main(String[] args) throws EntryNotFoundException {
 
-        //Get a new instance of PointOfSaleFacade
         PointOfSaleFacade pointOfSaleFacade = new PointOfSaleFacade();
 
         pointOfSaleFacade.getProductService().add(new Product("A",new BigDecimal(2.00)));
