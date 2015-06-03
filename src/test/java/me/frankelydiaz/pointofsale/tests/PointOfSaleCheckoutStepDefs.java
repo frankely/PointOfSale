@@ -1,8 +1,9 @@
 package me.frankelydiaz.pointofsale.tests;
 
-import cucumber.annotation.en.And;
-import cucumber.annotation.en.Given;
-import cucumber.annotation.en.Then;
+
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
 import me.frankelydiaz.pointofsale.PointOfSaleFacade;
 import me.frankelydiaz.pointofsale.ShoppingCartImpl;
 import me.frankelydiaz.pointofsale.models.Product;
