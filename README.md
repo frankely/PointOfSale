@@ -19,16 +19,53 @@ mvn test
 
 ```
 
-## Use API ##
+## Use the API ##
 
 In order to use the API you need an instance of PointOfSaleFacade
 
 ```
 #!java
-       PointOfSaleFacade pointOfSaleFacade = new PointOfSaleFacade();
+PointOfSaleFacade pointOfSaleFacade = new PointOfSaleFacade();
 ```
+
 ### Add a new product
 
+```
+#!java
+pointOfSaleFacade.getProductService().add(new Product("A",new BigDecimal(2.00)));
+...
+```
+
+### Set volume price
+
+```
+#!java
+pointOfSaleFacade.getProductService().addVolumePrice(new ProductVolumePrice("A",4,new BigDecimal(7.00)));
+...
+```
+
+### Scan a product
+
+```
+#!java
+pointOfSaleFacade.getPointOfSaleTerminaService().scan("A");
+....
+```
+
+### Calculate Total
+
+```
+#!java
+BigDecimal total = pointOfSaleFacade.getPointOfSaleTerminaService().calculateTotal();
+```
+
+### Checkout (Set everything ready for another order)
+
+```
+#!java
+pointOfSaleFacade.getPointOfSaleTerminaService().checkout();
+```
+### Full sample
 
 ```
 #!java
