@@ -6,51 +6,48 @@ Feature: Point Of Sale Checkout
   based on the per unit prices or the volume prices as applicable.
 
   Background:
-    Given These products exists
-      | Code | Price |
+    Given these products exists
+      | code | price |
       | A    | 2.00  |
       | B    | 12.00 |
       | C    | 1.25  |
       | D    | 0.15  |
-    And Have these volume prices
-      | Code | Units | Price |
+    And have these volume prices
+      | productCode | units | price |
       | A    | 4     | 7.00  |
       | C    | 6     | 6.00  |
 
   Scenario: Checkout without volume prices
-    Given I add these products to my shopping cart:
-      | Code |
+    Given I add these products to my shopping cart
       | A    |
       | B    |
       | C    |
       | D    |
     When I process my order
-    Then The total should be 15.40
+    Then the total should be 15.40
 
   Scenario: Checkout with single product with volume prices
-    Given I add these products to my shopping cart:
-      |Code|
-      |C|
-      |C|
-      |C|
-      |C|
-      |C|
-      |C|
-      |C|
+    Given I add these products to my shopping cart
+      | C    |
+      | C    |
+      | C    |
+      | C    |
+      | C    |
+      | C    |
+      | C    |
     When I process my order
-    Then The total should be 7.25
+    Then the total should be 7.25
 
 
   Scenario: Checkout with single product with volume prices and other products
-    Given I add these products to my shopping cart:
-      |Code|
-      |A|
-      |B|
-      |C|
-      |D|
-      |A|
-      |B|
-      |A|
-      |A|
+    Given I add these products to my shopping cart
+      | A    |
+      | B    |
+      | C    |
+      | D    |
+      | A    |
+      | B    |
+      | A    |
+      | A    |
     When I process my order
-    Then The total should be 32.40
+    Then the total should be 32.40
