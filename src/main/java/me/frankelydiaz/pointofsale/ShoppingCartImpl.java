@@ -1,6 +1,7 @@
 package me.frankelydiaz.pointofsale;
 
 import me.frankelydiaz.pointofsale.models.Product;
+import me.frankelydiaz.pointofsale.models.ProductVolumePrice;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -30,7 +31,7 @@ public class ShoppingCartImpl implements ShoppingCart {
         if (products.isEmpty())
             return BigDecimal.ZERO;
 
-        Map<String, Long> unitsByProduct = products.stream()
+        final Map<String, Long> unitsByProduct = products.stream()
                 .collect(Collectors.groupingBy(o -> o.getCode(), Collectors.counting()));
 
         BigDecimal total = BigDecimal.ZERO;
@@ -44,7 +45,7 @@ public class ShoppingCartImpl implements ShoppingCart {
 
     private BigDecimal calculateProductTotal(final String productCode, final long units) {
 
-        Product product = products.stream().filter(p -> p.getCode() == productCode).findFirst().get();
+        final Product product = products.stream().filter(p -> p.getCode() == productCode).findFirst().get();
 
         if (product == null)
             return BigDecimal.ZERO;
@@ -52,7 +53,22 @@ public class ShoppingCartImpl implements ShoppingCart {
         if (units == SINGLE_UNIT)
             return product.getPrice();
 
-        return BigDecimal.ZERO;
+        if (product.hasVolumePrices()) {
+            final ProductVolumePrice volumePrice = product.getVolumePrices().stream().filter(v -> v.getUnits() <= units).findFirst().get();
+
+            if (volumePrice == null)
+                return product.getPrice().multiply(new BigDecimal(units));
+
+            final long unitsGroupByVolume = (int) units / volumePrice.getUnits();
+            final long singleUnits = (units - (unitsGroupByVolume * volumePrice.getUnits()));
+
+            BigDecimal unitsGroupByVolumeTotal = volumePrice.getPrice().multiply(new BigDecimal(unitsGroupByVolume));
+            BigDecimal singleUnitsTotal = product.getPrice().multiply(new BigDecimal(singleUnits));
+
+            return unitsGroupByVolumeTotal.add(singleUnitsTotal);
+        }
+
+        return product.getPrice().multiply(new BigDecimal(units));
     }
 
 }

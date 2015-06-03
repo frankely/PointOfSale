@@ -22,6 +22,10 @@ public class Product {
         this.price = price;
     }
 
+    public boolean hasVolumePrices() {
+        return volumePrices != null && !volumePrices.isEmpty();
+    }
+
     public BigDecimal getPrice() {
         return price;
     }
