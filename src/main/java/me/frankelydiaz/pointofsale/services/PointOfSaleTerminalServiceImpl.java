@@ -1,10 +1,10 @@
 package me.frankelydiaz.pointofsale.services;
 
-import me.frankelydiaz.pointofsale.exceptions.EntryNotFoundException;
+import me.frankelydiaz.pointofsale.ShoppingCart;
 import me.frankelydiaz.pointofsale.models.Product;
-import me.frankelydiaz.pointofsale.models.ProductVolumePrice;
 import me.frankelydiaz.pointofsale.repositories.ProductRepository;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -12,35 +12,34 @@ import java.util.List;
  */
 public class PointOfSaleTerminalServiceImpl implements PointOfSaleTerminalService {
 
+    private ShoppingCart shoppingCart;
     private ProductRepository productRepository;
 
-    public PointOfSaleTerminalServiceImpl(ProductRepository productRepository) {
+    public PointOfSaleTerminalServiceImpl(ShoppingCart shoppingCart, ProductRepository productRepository) {
+        this.shoppingCart = shoppingCart;
         this.productRepository = productRepository;
     }
 
     @Override
-    public void add(Product product) {
-        productRepository.add(product);
+    public void scan(String productCode) {
+        Product product = productRepository.find(productCode);
+
+        if (product == null)
+            return;
+
+        shoppingCart.add(product);
     }
 
     @Override
-    public void add(List<Product> products) {
-        products.stream().forEach(p -> productRepository.add(p));
+    public BigDecimal calculateTotal() {
+        return null;
     }
 
     @Override
-    public void addVolumePrice(ProductVolumePrice productVolumePrice) throws EntryNotFoundException {
-        productRepository.addVolumePrice(productVolumePrice);
-    }
+    public void scan(List<String> products) {
+        if (products == null || products.isEmpty())
+            return;
 
-    @Override
-    public void addVolumePrice(List<ProductVolumePrice> productVolumePrices) {
-        productVolumePrices.stream().forEach(p -> {
-            try {
-                productRepository.addVolumePrice(p);
-            } catch (EntryNotFoundException e) {
-                e.printStackTrace();
-            }
-        });
+        products.stream().forEach(p -> scan(p));
     }
 }
