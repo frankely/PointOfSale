@@ -23,7 +23,6 @@ Feature: Point Of Sale Checkout
       | B    |
       | C    |
       | D    |
-    When I process my order
     Then the total should be 15.40
 
   Scenario: Checkout with single product with volume prices
@@ -35,7 +34,6 @@ Feature: Point Of Sale Checkout
       | C    |
       | C    |
       | C    |
-    When I process my order
     Then the total should be 7.25
 
 
@@ -49,5 +47,4 @@ Feature: Point Of Sale Checkout
       | B    |
       | A    |
       | A    |
-    When I process my order
     Then the total should be 32.40

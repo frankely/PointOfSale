@@ -3,7 +3,6 @@ package me.frankelydiaz.pointofsale.tests;
 import cucumber.annotation.en.And;
 import cucumber.annotation.en.Given;
 import cucumber.annotation.en.Then;
-import cucumber.annotation.en.When;
 import me.frankelydiaz.pointofsale.ShoppingCartImpl;
 import me.frankelydiaz.pointofsale.models.Product;
 import me.frankelydiaz.pointofsale.models.ProductVolumePrice;
@@ -47,13 +46,10 @@ public class PointOfSaleCheckoutStepDefs {
         pointOfSaleTerminaService.scan(products);
     }
 
-    @When("^I process my order$")
-    public void processOrder() throws Throwable {
-
-    }
 
     @Then("^the total should be (.+)$")
     public void viewTotal(BigDecimal total) throws Throwable {
+        total = total.setScale(2);
         assertEquals(total, pointOfSaleTerminaService.calculateTotal());
     }
 }

@@ -7,7 +7,7 @@ import java.util.List;
  * Created by frankelydiaz on 6/3/15.
  */
 public interface PointOfSaleTerminalService {
-    void scan(String productCode);
+    void scan(final String productCode);
     BigDecimal calculateTotal();
-    void scan(List<String> products);
+    void scan(final List<String> products);
 }

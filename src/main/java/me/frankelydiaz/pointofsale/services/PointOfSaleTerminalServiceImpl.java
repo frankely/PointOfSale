@@ -1,6 +1,7 @@
 package me.frankelydiaz.pointofsale.services;
 
 import me.frankelydiaz.pointofsale.ShoppingCart;
+import me.frankelydiaz.pointofsale.ShoppingCartImpl;
 import me.frankelydiaz.pointofsale.models.Product;
 import me.frankelydiaz.pointofsale.repositories.ProductRepository;
 
@@ -21,7 +22,7 @@ public class PointOfSaleTerminalServiceImpl implements PointOfSaleTerminalServic
     }
 
     @Override
-    public void scan(String productCode) {
+    public void scan(final String productCode) {
         Product product = productRepository.find(productCode);
 
         if (product == null)
@@ -32,11 +33,11 @@ public class PointOfSaleTerminalServiceImpl implements PointOfSaleTerminalServic
 
     @Override
     public BigDecimal calculateTotal() {
-        return null;
+        return shoppingCart.calculateTotal();
     }
 
     @Override
-    public void scan(List<String> products) {
+    public void scan(final List<String> products) {
         if (products == null || products.isEmpty())
             return;
 

@@ -45,5 +45,6 @@ public class Product {
     public void setVolumePrices(List<ProductVolumePrice> volumePrices) {
         this.volumePrices = volumePrices;
     }
+
 }
 
