@@ -2,6 +2,7 @@
 
 This README would normally document whatever steps are necessary to get your application up and running.
 
+I used BDD  for this and here is the feature file corresponding to the tests [PointOfSaleCheckout.feature](https://github.com/frankelydiaz/PointOfSale/blob/master/src/test/resources/features/PointOfSaleCheckout.feature) 
 
 ## Prerequisites 
 
