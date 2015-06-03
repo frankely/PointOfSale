@@ -1,10 +1,7 @@
 package me.frankelydiaz.pointofsale;
 
 import me.frankelydiaz.pointofsale.repositories.InMemoryProductRepositoryImpl;
-import me.frankelydiaz.pointofsale.services.PointOfSaleTerminalService;
-import me.frankelydiaz.pointofsale.services.PointOfSaleTerminalServiceImpl;
-import me.frankelydiaz.pointofsale.services.ProductService;
-import me.frankelydiaz.pointofsale.services.ProductServiceImpl;
+import me.frankelydiaz.pointofsale.services.*;
 
 /**
  * Created by frankelydiaz on 6/3/15.

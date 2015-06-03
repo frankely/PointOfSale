@@ -10,4 +10,5 @@ public interface PointOfSaleTerminalService {
     void scan(final String productCode);
     BigDecimal calculateTotal();
     void scan(final List<String> products);
+    void checkout();
 }

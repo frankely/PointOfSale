@@ -1,7 +1,6 @@
 package me.frankelydiaz.pointofsale.services;
 
-import me.frankelydiaz.pointofsale.ShoppingCart;
-import me.frankelydiaz.pointofsale.ShoppingCartImpl;
+import me.frankelydiaz.pointofsale.NumberSettings;
 import me.frankelydiaz.pointofsale.models.Product;
 import me.frankelydiaz.pointofsale.repositories.ProductRepository;
 
@@ -33,7 +32,7 @@ public class PointOfSaleTerminalServiceImpl implements PointOfSaleTerminalServic
 
     @Override
     public BigDecimal calculateTotal() {
-        return shoppingCart.calculateTotal();
+        return shoppingCart.calculateTotal().setScale(NumberSettings.ROUND_SCALE,BigDecimal.ROUND_CEILING);
     }
 
     @Override
@@ -42,5 +41,10 @@ public class PointOfSaleTerminalServiceImpl implements PointOfSaleTerminalServic
             return;
 
         products.stream().forEach(p -> scan(p));
+    }
+
+    @Override
+    public void checkout() {
+        shoppingCart.clear();
     }
 }

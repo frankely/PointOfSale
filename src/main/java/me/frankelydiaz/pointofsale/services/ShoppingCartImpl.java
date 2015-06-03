@@ -1,4 +1,4 @@
-package me.frankelydiaz.pointofsale;
+package me.frankelydiaz.pointofsale.services;
 
 import me.frankelydiaz.pointofsale.models.Product;
 import me.frankelydiaz.pointofsale.models.ProductVolumePrice;
@@ -41,6 +41,11 @@ public class ShoppingCartImpl implements ShoppingCart {
         }
 
         return total;
+    }
+
+    @Override
+    public void clear() {
+        products = new ArrayList<>();
     }
 
     private BigDecimal calculateProductTotal(final String productCode, final long units) {

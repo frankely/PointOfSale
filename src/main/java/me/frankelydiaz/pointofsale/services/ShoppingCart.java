@@ -1,4 +1,4 @@
-package me.frankelydiaz.pointofsale;
+package me.frankelydiaz.pointofsale.services;
 
 import me.frankelydiaz.pointofsale.models.Product;
 
@@ -11,5 +11,7 @@ public interface ShoppingCart {
     void add(final Product product);
 
     BigDecimal calculateTotal();
+
+    void clear();
 }
 

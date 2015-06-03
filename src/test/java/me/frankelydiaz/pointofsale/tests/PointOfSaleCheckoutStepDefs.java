@@ -5,14 +5,8 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import me.frankelydiaz.pointofsale.PointOfSaleFacade;
-import me.frankelydiaz.pointofsale.ShoppingCartImpl;
 import me.frankelydiaz.pointofsale.models.Product;
 import me.frankelydiaz.pointofsale.models.ProductVolumePrice;
-import me.frankelydiaz.pointofsale.repositories.InMemoryProductRepositoryImpl;
-import me.frankelydiaz.pointofsale.services.PointOfSaleTerminalService;
-import me.frankelydiaz.pointofsale.services.PointOfSaleTerminalServiceImpl;
-import me.frankelydiaz.pointofsale.services.ProductService;
-import me.frankelydiaz.pointofsale.services.ProductServiceImpl;
 
 import java.math.BigDecimal;
 import java.util.List;
