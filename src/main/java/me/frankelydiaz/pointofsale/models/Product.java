@@ -1,6 +1,7 @@
 package me.frankelydiaz.pointofsale.models;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -9,12 +10,14 @@ import java.util.List;
 public class Product {
     private String code;
     private BigDecimal price;
-    private List<ProductVolumePrice> volumePriceList;
+    private List<ProductVolumePrice> volumePrices;
 
     public Product() {
+        volumePrices = new ArrayList<>();
     }
 
     public Product(String code, BigDecimal price) {
+        this();
         this.code = code;
         this.price = price;
     }
@@ -35,12 +38,12 @@ public class Product {
         this.code = code;
     }
 
-    public List<ProductVolumePrice> getVolumePriceList() {
-        return volumePriceList;
+    public List<ProductVolumePrice> getVolumePrices() {
+        return volumePrices;
     }
 
-    public void setVolumePriceList(List<ProductVolumePrice> volumePriceList) {
-        this.volumePriceList = volumePriceList;
+    public void setVolumePrices(List<ProductVolumePrice> volumePrices) {
+        this.volumePrices = volumePrices;
     }
 }
 

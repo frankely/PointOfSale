@@ -41,8 +41,10 @@ public class InMemoryProductRepositoryImpl implements ProductRepository {
         if (product == null)
             throw new EntryNotFoundException("Product not found");
 
+        if (product.getVolumePrices() == null)
+            product.setVolumePrices(new ArrayList<>());
 
-        product.getVolumePriceList().add(productVolumePrice);
+        product.getVolumePrices().add(productVolumePrice);
 
     }
 }

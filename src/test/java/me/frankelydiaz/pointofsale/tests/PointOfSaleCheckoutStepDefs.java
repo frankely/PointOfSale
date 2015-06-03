@@ -9,6 +9,8 @@ import cucumber.runtime.PendingException;
 import me.frankelydiaz.pointofsale.models.ProductVolumePrice;
 import me.frankelydiaz.pointofsale.repositories.InMemoryProductRepositoryImpl;
 import me.frankelydiaz.pointofsale.repositories.ProductRepository;
+import me.frankelydiaz.pointofsale.services.PointOfSaleTerminalService;
+import me.frankelydiaz.pointofsale.services.PointOfSaleTerminalServiceImpl;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -18,17 +20,16 @@ import java.util.List;
  */
 public class PointOfSaleCheckoutStepDefs {
 
-    private ProductRepository productRepository = InMemoryProductRepositoryImpl.getInstance();
+    private PointOfSaleTerminalService pointOfSaleTerminalService = new PointOfSaleTerminalServiceImpl(InMemoryProductRepositoryImpl.getInstance());
 
     @Given("^these products exists$")
     public void createProducts(List<Product> products) throws Throwable {
-
+        pointOfSaleTerminalService.add(products);
     }
 
     @And("^have these volume prices$")
     public void createProductVolumePrices(List<ProductVolumePrice> productVolumePrices) throws Throwable {
-        // Express the Regexp above with the code you wish you had
-        throw new PendingException();
+        pointOfSaleTerminalService.addVolumePrice(productVolumePrices);
     }
 
     @Given("^I add these products to my shopping cart$")
