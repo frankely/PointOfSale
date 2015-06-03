@@ -3,6 +3,7 @@ package me.frankelydiaz.pointofsale.tests;
 import cucumber.annotation.en.And;
 import cucumber.annotation.en.Given;
 import cucumber.annotation.en.Then;
+import me.frankelydiaz.pointofsale.PointOfSaleFacade;
 import me.frankelydiaz.pointofsale.ShoppingCartImpl;
 import me.frankelydiaz.pointofsale.models.Product;
 import me.frankelydiaz.pointofsale.models.ProductVolumePrice;
@@ -22,34 +23,33 @@ import static org.junit.Assert.assertEquals;
  */
 public class PointOfSaleCheckoutStepDefs {
 
-    private ProductService productService;
-    private PointOfSaleTerminalService pointOfSaleTerminaService;
+    private PointOfSaleFacade pointOfSaleFacade;
+
 
     public PointOfSaleCheckoutStepDefs() {
-        this.productService = new ProductServiceImpl(InMemoryProductRepositoryImpl.getInstance());
-        this.pointOfSaleTerminaService = new PointOfSaleTerminalServiceImpl(new ShoppingCartImpl(), InMemoryProductRepositoryImpl.getInstance());
+        pointOfSaleFacade = new PointOfSaleFacade();
     }
 
 
     @Given("^these products exists$")
     public void createProducts(List<Product> products) throws Throwable {
-        productService.add(products);
+        pointOfSaleFacade.getProductService().add(products);
     }
 
     @And("^have these volume prices$")
     public void createProductVolumePrices(List<ProductVolumePrice> productVolumePrices) throws Throwable {
-        productService.addVolumePrice(productVolumePrices);
+        pointOfSaleFacade.getProductService().addVolumePrice(productVolumePrices);
     }
 
     @Given("^I add these products to my shopping cart$")
     public void addToShoppingCart(List<String> products) throws Throwable {
-        pointOfSaleTerminaService.scan(products);
+        pointOfSaleFacade.getPointOfSaleTerminaService().scan(products);
     }
 
 
     @Then("^the total should be (.+)$")
     public void viewTotal(BigDecimal total) throws Throwable {
         total = total.setScale(2);
-        assertEquals(total, pointOfSaleTerminaService.calculateTotal());
+        assertEquals(total, pointOfSaleFacade.getPointOfSaleTerminaService().calculateTotal());
     }
 }
