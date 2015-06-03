@@ -1,74 +1,66 @@
-# README #
+# README 
 
 This README would normally document whatever steps are necessary to get your application up and running.
 
 
-## Prerequisites ##
+## Prerequisites 
 
 * Java 8 SDK
 * Maven 3.0
 
 
-## Run Tests ##
+## Run Tests 
 
 Run the following command in the project root folder where is located pom.xml
 
 ```
-#!
 mvn test
 
 ```
 
-## Use the API ##
+## Use the API 
 
 In order to use the API you need an instance of PointOfSaleFacade
 
-```
-#!java
+```java
 PointOfSaleFacade pointOfSaleFacade = new PointOfSaleFacade();
 ```
 
 ### Add a new product
 
-```
-#!java
+```java
 pointOfSaleFacade.getProductService().add(new Product("A",new BigDecimal(2.00)));
 ...
 ```
 
 ### Set volume price
 
-```
-#!java
+```java
 pointOfSaleFacade.getProductService().addVolumePrice(new ProductVolumePrice("A",4,new BigDecimal(7.00)));
 ...
 ```
 
 ### Scan a product
 
-```
-#!java
+```java
 pointOfSaleFacade.getPointOfSaleTerminaService().scan("A");
 ....
 ```
 
 ### Calculate Total
 
-```
-#!java
+```java
 BigDecimal total = pointOfSaleFacade.getPointOfSaleTerminaService().calculateTotal();
 ```
 
 ### Checkout (Set everything ready for another order)
 
-```
-#!java
+```java
 pointOfSaleFacade.getPointOfSaleTerminaService().checkout();
 ```
 ### Full sample
 
-```
-#!java
+```java
 
 public class Main {
     public static void main(String[] args) throws EntryNotFoundException {
