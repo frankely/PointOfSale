@@ -1,4 +1,4 @@
-# README 
+# README (THIS IS JUST A EXCERCISE) DO NOT USE THIS
 
 This README would normally document whatever steps are necessary to get your application up and running.
 
